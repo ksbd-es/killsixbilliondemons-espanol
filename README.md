@@ -1,0 +1,1 @@
+Traduccion al español de KSBD.
