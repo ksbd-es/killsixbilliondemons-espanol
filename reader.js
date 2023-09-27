@@ -137,7 +137,7 @@ body.addEventListener('click', (e)=>{
   if(clickX < pageThird){
     anteriorPagina();
   }
-  else if(clickX > pageThird && clickX < pageThird * 2){
+  else if(clickX > pageThird && clickX < pageThird * 2 && e.target == pagina){
     console.log("Abrir imagen?");
     window.open(`img/comic/${books[paginaActual].pagina}.jpg`, 'blank');
   }
