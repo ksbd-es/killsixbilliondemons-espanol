@@ -1,1 +1,1 @@
-Traduccion al español de KSBD.
+Traducción al español de KSBD.
