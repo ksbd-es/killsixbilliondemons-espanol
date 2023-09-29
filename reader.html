@@ -3,6 +3,8 @@
   <head >
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="keywords" content="kill six billion demons, español, leer, traducción, cómic">
+    <meta name="description" content="Traducción al español del cómic Kill Six Billion Demons"> 
     <link rel="stylesheet" href="style/style.css">
     <link rel="icon" href="img/cropped-iconTP-32x32.jpg">
     <title>MATA 6 BILLONES DE DEMONIOS</title>
@@ -11,36 +13,37 @@
   </head>
   <body>
     <div class="contenedor-principal">
-      <div class="banner" >
-        <img class="imagen" src="img/banner.jpg">
-      </div>
-      <div class="barra">
-        <a class="links" href="index.html">Inicio </a>
-        <a class="links" href="reader.html">Leer</a>
-        
-        
-      </div>
-      <div class="barra-navegacion">
-        <button onclick="anteriorPagina()">Atrás</button>
-        <select id="chapter-select">
-          <option value="1"> Capitulo 1</option>
-          <option value="2"> Capitulo 2</option>
-          <option value="3"> Capitulo 3</option>
-          <option value="4"> Capitulo 4</option>
-          <option value="5"> Capitulo 5</option>
-        </select>
-        <button onclick="siguientePagina()">Adelante</button>
-      </div>
-      <div class="contenedor-pagina">
-        
-        <img class="imagen" id="imagen" src="">
-        
-      </div>
-      <div class="contenedor-texto">
-        <h2></h2>
-        <p></p>
-
-      </div>
+      <section>
+        <div class="banner" >
+          <img class="imagen" src="img/banner.jpg" alt="Mata 6 billones de demonios">
+        </div>
+        <div class="barra">
+          <a class="links" href="index.html">Inicio </a>
+          <a class="links" href="reader.html">Leer</a>
+          
+          
+        </div>
+      </section>
+      <section>
+        <div class="barra-navegacion">
+          <button onclick="anteriorPagina()">Atrás</button>
+          <select id="chapter-select">
+            <option value="1"> Capitulo 1</option>
+            <option value="2"> Capitulo 2</option>
+            <option value="3"> Capitulo 3</option>
+            <option value="4"> Capitulo 4</option>
+            <option value="5"> Capitulo 5</option>
+          </select>
+          <button onclick="siguientePagina()">Adelante</button>
+        </div>
+        <div class="contenedor-pagina">
+          <img class="imagen" id="imagen" src="">
+        </div>
+        <div class="contenedor-texto">
+          <h2></h2>
+          <p></p>
+        </div>
+      </section>
     </div>
     <script src="reader.js"></script>
 

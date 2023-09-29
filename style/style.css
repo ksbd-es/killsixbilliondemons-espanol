@@ -7,6 +7,7 @@
 }
 body{
   background-color: #191315;
+  font-size: 2em;
 }
 .contenedor-principal{
   display: flex;
@@ -39,6 +40,11 @@ body{
   align-items: center;
 }
 
+.section{
+  padding: 0 20%;
+  margin: 0 auto;
+}
+
 
 .cajita{
   width: fit-content;
@@ -58,10 +64,12 @@ button {
   border-radius: 5px;
   background-color: #191315;
   color: aliceblue;
+
+  font-size: 1rem;
 }
 
-select{
-
+h2{
+  margin: 40px 0;
 }
 a{
   color: aliceblue;
@@ -99,6 +107,9 @@ a:active {
 
   .contenedor-pagina{
     margin: 30px 0px;
+  }
+  .section{
+    padding: 0 10%;
   }
 
   .imagen{
