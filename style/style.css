@@ -71,6 +71,9 @@ button {
 h2{
   margin: 40px 0;
 }
+p{
+  margin: 28px 0;
+}
 a{
   color: aliceblue;
   
@@ -108,12 +111,17 @@ a:active {
   .contenedor-pagina{
     margin: 30px 0px;
   }
-  .section{
+  div.section{
     padding: 0 10%;
+    margin: 0 10px;
   }
 
   .imagen{
     max-width: 100%;
+  }
+
+  body{
+    font-size: 1rem;
   }
   
 }
