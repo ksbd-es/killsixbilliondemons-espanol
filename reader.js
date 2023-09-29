@@ -103,6 +103,7 @@ const chapterSelector = document.querySelector('#chapter-select');
 const LIMITE_SUPERIOR = 86;
 const LIMITE_INFERIOR = 0;
 const optionList = document.querySelectorAll("option");
+const contenedorPagina = document.querySelector(".contenedor-pagina");
 
 chapterSelector.addEventListener('change', (e)=>{
   console.log(e);
@@ -130,11 +131,11 @@ chapterSelector.addEventListener('change', (e)=>{
   }
 })
 
-body.addEventListener('click', (e)=>{
+contenedorPagina.addEventListener('click', (e)=>{
 
   const clickX = e.pageX;
   const pageThird = body.clientWidth / 3;
-  if(clickX < pageThird){
+  if(clickX < pageThird ){
     anteriorPagina();
   }
   else if(clickX > pageThird && clickX < pageThird * 2 && e.target == pagina){

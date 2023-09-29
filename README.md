@@ -1,1 +1,1 @@
-Traducción al español de KSBD.
+Traducción al español de Kill Six Billion Demons.
