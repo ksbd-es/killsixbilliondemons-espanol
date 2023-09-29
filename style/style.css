@@ -7,7 +7,7 @@
 }
 body{
   background-color: #191315;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 .contenedor-principal{
   display: flex;
@@ -20,18 +20,18 @@ body{
 .banner{
   display: flex;
   justify-content: center;
-  cursor: pointer;
 }
 .barra{
   display: flex;
-  height: 40px;
   color: aliceblue;
+  gap: 10px;
   justify-content: center;
   
 }
 .barra-navegacion{
   display: flex;
   justify-content: center;
+  margin: 30px 0 20px;
 }
 
 .contenedor-pagina{
@@ -51,11 +51,7 @@ body{
   margin: auto;
   cursor: pointer;
 }
-.links{
-  display: inline-block;
-  margin: 30 auto;
-  padding: 10px 20px;
-}
+
 
 button {
   margin: 0 30px;
@@ -64,44 +60,46 @@ button {
   border-radius: 5px;
   background-color: #191315;
   color: aliceblue;
-
   font-size: 1rem;
 }
 
+select{
+  padding: 8px 15px;
+  border-radius: 10px;
+}
 h2{
   margin: 40px 0;
 }
 p{
   margin: 28px 0;
 }
+
 a{
   color: aliceblue;
+  text-decoration: none;
+  font-size: 2rem;
+}
+.links{
+  display: inline-block;
+  padding: 20px 30px;
   
 }
 
-a:link {
-  text-decoration: none;
+a.url{
+  text-decoration: underline;
 }
 
-a:visited {
-  text-decoration: none;
+a:hover{
+  color: #d31a42;
+  cursor: pointer;
 }
 
-a:hover {
-  text-decoration: none;
-}
-
-a:active {
-  text-decoration: none;
-}
-
-#imagen{
+.imagen{
   cursor: pointer;
 }
 
 .contenedor-texto{
   text-align: center;
-  padding: 10px;
 }
 
 
@@ -121,7 +119,23 @@ a:active {
   }
 
   body{
+    font-size: 1em;
+  }
+
+  a{
     font-size: 1rem;
+  }
+
+  .links{
+    font-size: 1.5rem;
+  }
+
+  button{
+    margin: 0 8px;
+  }
+
+  h2{
+    margin: 15px;
   }
   
 }

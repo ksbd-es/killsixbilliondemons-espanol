@@ -175,7 +175,7 @@ function setTitulo(){
   const header = document.querySelector("h2");
   const texto = document.querySelector("p");
 
-  header.innerText = `Libro ${books[paginaActual].libro}: ${bookNames[books[paginaActual].libro]} - Capítulo ${books[paginaActual].capitulo} - Página ${books[paginaActual].pagina} `;
+  header.innerText = `${bookNames[books[paginaActual].libro]}: ${books[paginaActual].capitulo}-${books[paginaActual].pagina} `;
 }
 
 
