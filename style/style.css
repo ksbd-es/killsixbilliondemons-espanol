@@ -87,6 +87,7 @@ a{
 
 a.url{
   text-decoration: underline;
+  font-size: inherit;
 }
 
 a:hover{
