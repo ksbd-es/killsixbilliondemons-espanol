@@ -103,6 +103,50 @@ a:hover{
   text-align: center;
 }
 
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  background-color: #b45a5a;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 40px;
+}
+
+.dropdown-content {
+  max-height: 70vh;
+  overflow:scroll; 
+}
+
+.dropdown-content a{
+  display: block;
+}
+
+.show {
+  display: block;
+}
+
+.bookTag{
+  font-size: 1rem;
+}
+.chapterLink{
+  font-size: 1rem;
+}
+
+.loading {
+  min-height: 1000px;
+  background-image: url('img/Rolling@1x-1.0s-200px-200px.gif') ;
+  background-position: center;
+  background-size: 100px 100px;
+  background-repeat: no-repeat;
+}
+
 
 
 @media only screen and (max-width: 900px){
@@ -140,3 +184,4 @@ a:hover{
   }
   
 }
+

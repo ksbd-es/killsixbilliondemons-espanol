@@ -9,14 +9,7 @@
     <link rel="icon" href="img/cropped-iconTP-32x32.jpg">
     <title>MATA 6 BILLONES DE DEMONIOS</title>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZ35EGKW9J"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-  
-      gtag('config', 'G-WZ35EGKW9J');
-    </script>  
+    
   </head>
   
   <body>
@@ -26,33 +19,28 @@
         <img class="imagen" src="img/banner.jpg" alt="Mata 6 billones de demonios">
       </div>
       <div class="barra">
-        <a class="links" href="index.html">Inicio </a>
+        <a class="links" href="index.html" id="home">Inicio </a>
         <a class="links" href="reader.html">Leer</a>
     
     
       </div>
     
       <div class="barra-navegacion">
-        <button onclick="anteriorPagina()">Atrás</button>
-        <select id="chapter-select">
-          <option value="1"> Capítulo 1</option>
-          <option value="2"> Capítulo 2</option>
-          <option value="3"> Capítulo 3</option>
-          <option value="4"> Capítulo 4</option>
-          <option value="5"> Capítulo 5</option>
-        </select>
-        <button onclick="siguientePagina()">Adelante</button>
+        <button onclick="moveToPreviousPage()">Atrás</button>
+        <div class="dropdown" id="chapter-select">
+          <button id="dropdown-button"> Capitulo </button>
+          <div id="dropdown-content" class="dropdown-content">
+
+          </div>
+        </div>
+        <button onclick="moveToNextPage()">Adelante</button>
       </div>
       <div class="contenedor-pagina">
         <img class="imagen" id="imagen" src="">
       </div>
-      <div class="contenedor-texto">
-        <h2></h2>
-        <p></p>
-      </div>
     
     </div>
-    <script src="reader.js"></script>
+    <script async src="reader.js"></script>
 
   </body>
 </html>
