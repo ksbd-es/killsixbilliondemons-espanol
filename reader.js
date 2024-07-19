@@ -1,8 +1,16 @@
 const body = document.querySelector('body');
 const contenido = document.querySelector('#contenido');;
 const counter = document.querySelector('#counter');
-const image = document.querySelector('#imagen');
+const image = document.querySelector('.contenedor-pagina .imagen');
 const contenedor = document.querySelector('.contenedor-pagina');
+const btnDropdown = document.querySelector('#dropdown-button');
+const btnCh = document.querySelector('#chapter-button');
+const btnPg = document.querySelector('#page-button');
+const dropdown = document.querySelector('#dropdown-content');
+const dropdownPage = document.querySelector('#dropdown-page');
+const btnPrev = document.querySelector('#prev');
+const btnNext = document.querySelector('#next');
+
 
 const data = {
   bk: [
@@ -84,9 +92,45 @@ const pageCounter = {
 const chapterKeys = [];
 const map = generateMap();
 
+btnPg.addEventListener("click", ()=>{
+  toggleDisplay(dropdownPage);
+  }
+);
+
+body.addEventListener('click', (e)=>{
+  if(e.target != dropdown && e.target != btnDropdown){
+    document.querySelector('#dropdown-content').classList.remove("show");
+  }
+})
+
+body.addEventListener('click', (e)=>{
+  if(e.target != dropdown && e.target != btnPg){
+    document.querySelector('#dropdown-page').classList.remove("show");
+  }
+})
+body.addEventListener('keydown', (e)=>{
+  console.log(e.key);
+  if(e.key == 'ArrowRight') moveToNextPage();
+  if(e.key == 'ArrowLeft') moveToPreviousPage();
+})
+
 contenedor.addEventListener('click', (e)=>{
   const clickX = e.pageX;
   const pageThird = body.clientWidth / 3;
+  const pageHalf = body.clientWidth / 2;
+  const dist = pageHalf - clickX;
+  if(Math.abs(dist) < 50){
+    console.log("hola");
+    window.open(`${getPath(map.get(pageCounter.current))}`, 'blank');
+  }
+  else if(dist >0){
+    moveToPreviousPage();
+  }
+  else{
+    moveToNextPage();
+  }
+/*
+
   if(clickX < pageThird ){
     moveToPreviousPage();
   }
@@ -97,6 +141,7 @@ contenedor.addEventListener('click', (e)=>{
   else{
     moveToNextPage();
   }
+    */
 })
 
 
@@ -110,33 +155,66 @@ function getPositionString(object) {
 
 
 function setPageCounter(value) {
-  if (value >= 0 && value <= map.size){
+  
+  let isNewChapter = false;
+  if(map.get(value).c != map.get(pageCounter.current).c || map.get(value).b != map.get(pageCounter.current).b){
+    isNewChapter = true;
+    
+  }
+  
+  if (value >= 0 && value < map.size){
     pageCounter.current = value;
     //renderCounter();
     renderPage();
+    renderButtons();
+    if(isNewChapter){
+      generatePageDropdown();
+    }
   }
   else  throw new Error('Invalid value');
 }
 function getPageCounter() {
   return pageCounter.current;
 }
+
 function increasePageCounter() {
+  let isNewChapter = false;
+  if(map.get(pageCounter.current + 1).c != map.get(pageCounter.current).c || map.get(pageCounter.current + 1).b != map.get(pageCounter.current).b){
+    isNewChapter = true;
+    
+  }
   if(pageCounter.current < map.size -1){
     pageCounter.current++;
     //renderCounter();
     renderPage();
+    renderButtons();
+    if(isNewChapter){
+      generatePageDropdown();
+    }
+    
   }
-  else throw new Error('Last page reached');
+  //else throw new Error('Last page reached');
+  
   
 }
 
 function decreasePageCounter() {
+  let isNewChapter = false;
+  if(map.get(pageCounter.current -1).c != map.get(pageCounter.current).c || map.get(pageCounter.current -1).b != map.get(pageCounter.current).b ){
+    isNewChapter = true;
+    
+  }
   if(pageCounter.current > 0){
     pageCounter.current--;
     //renderCounter();
     renderPage();
+    renderButtons();
+
+    if(isNewChapter){
+      generatePageDropdown();
+    }
   }
-  else throw new Error('First page reached');
+  //else throw new Error('First page reached');
   
 }
 
@@ -147,6 +225,25 @@ function renderCounter() {
 
 function renderPage(){
   createImage(getPath(map.get(pageCounter.current)));
+  body.scrollTo(100, 100);
+}
+function renderButtons(){
+  if(pageCounter.current == 0){
+    btnPrev.disabled = true;
+    //btnPrev.classList.add('hidden');
+  }
+  else{
+    btnPrev.disabled = false;
+    //btnNext.classList.remove('hidden');
+  }
+  if(pageCounter.current == map.size -1){
+    btnNext.disabled = true;
+    //btnNext.classList.add('hidden');
+  }
+  else{
+    btnNext.disabled = false;
+    //btnNext.classList.remove('hidden');
+  }
 }
 
 function getPath(object){
@@ -159,7 +256,7 @@ function getPath(object){
 function createBookTag(book, container){
 
   let bookTag = document.createElement('div');
-  bookTag.innerText = book.title;
+  bookTag.innerText = book.title.toUpperCase();
   bookTag.classList.add('bookTag');
   container.appendChild(bookTag);
 }
@@ -174,12 +271,29 @@ function createChapterLink(chapter, container,chPos){
   container.appendChild(chapterLink);
 }
 
+function createPageLink(container,index){
+  let pageLink = document.createElement('a');
+  const pg = map.get(pageCounter.current).p;
+  let counter = index + chapterKeys[getChPos()];
+  pageLink.innerText = "Página " +  (index + 1);
+  pageLink.classList.add('pageLink');
+  
+  pageLink.setAttribute('data-path', counter);
+  pageLink.addEventListener('click', ()=>{
+    console.log(pageLink.getAttribute('data-path'));
+    setPageCounter(parseInt(pageLink.getAttribute('data-path')));
+    
+  })
+  container.appendChild(pageLink);
+}
+
 function generateDropdown(){
   const dropdown = document.querySelector('#dropdown-content');
   const dropbutton = document.querySelector("#dropdown-button");
+
   dropbutton.addEventListener("click", ()=>{
     console.log('hola')
-    toggleDisplay();
+    toggleDisplay(dropdown);
     }
   );
   let chPos = 0;
@@ -199,8 +313,63 @@ function generateDropdown(){
   });
   
 }
-function toggleDisplay() {
-  document.querySelector('#dropdown-content').classList.toggle("show");
+/*
+
+function generateChapterDropdown(dropdown, target){
+  const dropdown = document.querySelector('#dropdown-content');
+  const dropbutton = document.querySelector("#dropdown-button");
+  
+  dropbutton.addEventListener("click", ()=>{
+    toggleDisplay();
+    }
+  );
+  let chPos = 0;
+  data.bk.forEach(book => {
+    createBookTag(book, dropdown);
+    let bookContainer = document.createElement('div');
+    
+    bookContainer.classList.add('bookContainer');
+    bookContainer.setAttribute('id', book.id);
+    dropdown.appendChild(bookContainer);
+    book.ch.forEach(chapter => {
+      createChapterLink(chapter, bookContainer, chPos);
+      console.log(chapterKeys[chPos]);
+      chPos++;
+    })
+    
+  });
+}
+  */
+
+function generatePageDropdown(){
+  const dropdown = document.querySelector('#dropdown-page');
+  const dropbutton = document.querySelector("#page-button");
+  dropdown.childNodes.forEach(element => {
+    element.remove();
+  })
+  
+  
+  let bkIndex = map.get(pageCounter.current).b - 1;
+  let chIndex = map.get(pageCounter.current).c - 1;
+  let chapterLength = data.bk[bkIndex].ch[chIndex].pg;
+  
+  let pageContainer = document.createElement('div');
+  pageContainer.classList.add('pageContainer');
+  pageContainer.setAttribute('id', "pageContainer");
+  dropdown.appendChild(pageContainer);
+
+  for(let i = 0; i < chapterLength; i++){
+    createPageLink(pageContainer,i);
+  }
+  
+    
+  
+
+  
+  
+}
+function toggleDisplay(menu) {
+  menu.classList.toggle("show");
 }
 
 function generateMap(){
@@ -228,6 +397,21 @@ function generateMap(){
   return bookMap;
 }
 
+function getChPos(){
+  const book = map.get(pageCounter.current).b;
+  const chapter = parseInt(map.get(pageCounter.current).c);
+  let chPos = chapter - 1;
+  
+  if(book != 1){
+    for(let i = 0; i < book - 1; i++){
+      chPos += data.bk[i].ch.length;
+    }
+  }
+  return chPos;
+}
+  
+
+
 
 function moveToPreviousPage(){
   try{
@@ -250,13 +434,27 @@ function createImage(src) {
   const nuevaImagen = document.createElement('img');
   nuevaImagen.src = src;
   nuevaImagen.classList.add('loading');
+  nuevaImagen.classList.add('imagen');
   contenedor.replaceChildren(nuevaImagen);  
 }
 
+function printMap(){
+  map.forEach((value, key) => {
+    //console.log(key, " | "+value.b + "-" + value.c + "-" + value.p);
+    console.log(key, " | "+ map.get(key).b + "-" + map.get(key).c + "-" + map.get(key).p);
+  })
+}
+
+function toggleShow(button){
+  button.classList.toggle("");
+}
 
 
 generateDropdown();
+generatePageDropdown();
 //renderCounter();
+
 renderPage();
+renderButtons();
 
 

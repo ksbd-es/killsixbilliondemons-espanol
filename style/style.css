@@ -97,6 +97,7 @@ a:hover{
 
 .imagen{
   cursor: pointer;
+  
 }
 
 .contenedor-texto{
@@ -112,16 +113,23 @@ a:hover{
 .dropdown-content{
   display: none;
   position: absolute;
-  background-color: #b45a5a;
+  background-color: #110d0d;
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   top: 40px;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border-radius: 5px;
+  
+  overflow-x: hidden;
 }
 
 .dropdown-content {
-  max-height: 70vh;
-  overflow:scroll; 
+  max-height: 30vh;
+  /*overflow:scroll;*/ 
 }
 
 .dropdown-content a{
@@ -131,21 +139,56 @@ a:hover{
 .show {
   display: block;
 }
-
+.bookContainer{
+  display: flex;
+  flex-direction: column;
+  border-color: rgb(29, 29, 29);
+  
+  /*border-style: solid none;*/
+}
 .bookTag{
+  padding: 15px 20px 10px 20px;
+  font-size: 1rem;
+  text-align: left;
+}
+.chapterLink, .pageLink{
+  padding: 5px 20px 5px 20px;
   font-size: 1rem;
 }
-.chapterLink{
-  font-size: 1rem;
+
+.chapterLink:hover{
+  background-color: #443a3a;
+}
+.bookTag:hover{
+  background-color: #443a3a;
+}
+
+.dropdown button{
+  min-width: 200px;
 }
 
 .loading {
-  min-height: 1000px;
-  background-image: url('img/Rolling@1x-1.0s-200px-200px.gif') ;
+  
+  background-image: url('../img/Rolling@1x-1.0s-200px-200px.gif') ;
   background-position: center;
   background-size: 100px 100px;
   background-repeat: no-repeat;
 }
+
+.disabled{
+  display: none;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+/*
+.barra-navegacion-mobile button{
+  display: none;
+}
+  */
+
 
 
 
@@ -182,6 +225,23 @@ a:hover{
   h2{
     margin: 15px;
   }
+
+  .barra-navegacion{
+    flex-direction: column;
+    gap: 5px;
+  }
+  #prev, #next{
+    display: none;
+  }
+  /*
+  .barra-navegacion-mobile{
+    display: flex;
+    justify-content: space-around;
+  }
+  .barra-navegacion-mobile button{
+    display: block;
+  }
+    */
   
 }
 
