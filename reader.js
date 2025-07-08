@@ -79,7 +79,7 @@ const data = {
           title: 'Capitulo 6',
           pg: 20,
         }
-        
+
       ]
     }
   ]
@@ -129,39 +129,26 @@ contenedor.addEventListener('click', (e)=>{
   else{
     moveToNextPage();
   }
-/*
-
-  if(clickX < pageThird ){
-    moveToPreviousPage();
-  }
-  else if(clickX > pageThird && clickX < pageThird * 2 && e.target == pagina){
-    console.log("Abrir imagen?");
-    window.open(`img/comic/${books[paginaActual].pagina}.jpg`, 'blank');
-  }
-  else{
-    moveToNextPage();
-  }
-    */
 })
 
 
 
 function getPositionString(object) {
   let pathName = "/"+ data.bk[object.b-1].title.replace(/\s+/g, '-').toLowerCase();
-  return  data.bk[object.b-1].title+" "+ '- Capitulo ' + object.c + '- Pagina ' + object.p + "\n" 
+  return  data.bk[object.b-1].title+" "+ '- Capitulo ' + object.c + '- Pagina ' + object.p + "\n"
   + pathName+ '/' +object.b+ '-' + object.c + '-' + object.p+".jpg \n";
 }
 
 
 
 function setPageCounter(value) {
-  
+
   let isNewChapter = false;
   if(map.get(value).c != map.get(pageCounter.current).c || map.get(value).b != map.get(pageCounter.current).b){
     isNewChapter = true;
-    
+
   }
-  
+
   if (value >= 0 && value < map.size){
     pageCounter.current = value;
     //renderCounter();
@@ -181,7 +168,7 @@ function increasePageCounter() {
   let isNewChapter = false;
   if(map.get(pageCounter.current + 1).c != map.get(pageCounter.current).c || map.get(pageCounter.current + 1).b != map.get(pageCounter.current).b){
     isNewChapter = true;
-    
+
   }
   if(pageCounter.current < map.size -1){
     pageCounter.current++;
@@ -191,18 +178,18 @@ function increasePageCounter() {
     if(isNewChapter){
       generatePageDropdown();
     }
-    
+
   }
   //else throw new Error('Last page reached');
-  
-  
+
+
 }
 
 function decreasePageCounter() {
   let isNewChapter = false;
   if(map.get(pageCounter.current -1).c != map.get(pageCounter.current).c || map.get(pageCounter.current -1).b != map.get(pageCounter.current).b ){
     isNewChapter = true;
-    
+
   }
   if(pageCounter.current > 0){
     pageCounter.current--;
@@ -215,12 +202,12 @@ function decreasePageCounter() {
     }
   }
   //else throw new Error('First page reached');
-  
+
 }
 
 function renderCounter() {
-  counter.innerText = pageCounter.current + "\n" + getPositionString(map.get(pageCounter.current)) + "\n" 
-  
+  counter.innerText = pageCounter.current + "\n" + getPositionString(map.get(pageCounter.current)) + "\n"
+
 }
 
 function renderPage(){
@@ -277,12 +264,12 @@ function createPageLink(container,index){
   let counter = index + chapterKeys[getChPos()];
   pageLink.innerText = "Página " +  (index + 1);
   pageLink.classList.add('pageLink');
-  
+
   pageLink.setAttribute('data-path', counter);
   pageLink.addEventListener('click', ()=>{
     console.log(pageLink.getAttribute('data-path'));
     setPageCounter(parseInt(pageLink.getAttribute('data-path')));
-    
+
   })
   container.appendChild(pageLink);
 }
@@ -300,7 +287,7 @@ function generateDropdown(){
   data.bk.forEach(book => {
     createBookTag(book, dropdown);
     let bookContainer = document.createElement('div');
-    
+
     bookContainer.classList.add('bookContainer');
     bookContainer.setAttribute('id', book.id);
     dropdown.appendChild(bookContainer);
@@ -309,16 +296,16 @@ function generateDropdown(){
       console.log(chapterKeys[chPos]);
       chPos++;
     })
-    
+
   });
-  
+
 }
 /*
 
 function generateChapterDropdown(dropdown, target){
   const dropdown = document.querySelector('#dropdown-content');
   const dropbutton = document.querySelector("#dropdown-button");
-  
+
   dropbutton.addEventListener("click", ()=>{
     toggleDisplay();
     }
@@ -327,7 +314,7 @@ function generateChapterDropdown(dropdown, target){
   data.bk.forEach(book => {
     createBookTag(book, dropdown);
     let bookContainer = document.createElement('div');
-    
+
     bookContainer.classList.add('bookContainer');
     bookContainer.setAttribute('id', book.id);
     dropdown.appendChild(bookContainer);
@@ -336,7 +323,7 @@ function generateChapterDropdown(dropdown, target){
       console.log(chapterKeys[chPos]);
       chPos++;
     })
-    
+
   });
 }
   */
@@ -347,12 +334,12 @@ function generatePageDropdown(){
   dropdown.childNodes.forEach(element => {
     element.remove();
   })
-  
-  
+
+
   let bkIndex = map.get(pageCounter.current).b - 1;
   let chIndex = map.get(pageCounter.current).c - 1;
   let chapterLength = data.bk[bkIndex].ch[chIndex].pg;
-  
+
   let pageContainer = document.createElement('div');
   pageContainer.classList.add('pageContainer');
   pageContainer.setAttribute('id', "pageContainer");
@@ -361,12 +348,12 @@ function generatePageDropdown(){
   for(let i = 0; i < chapterLength; i++){
     createPageLink(pageContainer,i);
   }
-  
-    
-  
 
-  
-  
+
+
+
+
+
 }
 function toggleDisplay(menu) {
   menu.classList.toggle("show");
@@ -401,7 +388,7 @@ function getChPos(){
   const book = map.get(pageCounter.current).b;
   const chapter = parseInt(map.get(pageCounter.current).c);
   let chPos = chapter - 1;
-  
+
   if(book != 1){
     for(let i = 0; i < book - 1; i++){
       chPos += data.bk[i].ch.length;
@@ -409,7 +396,7 @@ function getChPos(){
   }
   return chPos;
 }
-  
+
 
 
 
@@ -435,7 +422,7 @@ function createImage(src) {
   nuevaImagen.src = src;
   nuevaImagen.classList.add('loading');
   nuevaImagen.classList.add('imagen');
-  contenedor.replaceChildren(nuevaImagen);  
+  contenedor.replaceChildren(nuevaImagen);
 }
 
 function printMap(){
