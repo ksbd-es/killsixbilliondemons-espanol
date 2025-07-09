@@ -1,7 +1,7 @@
 export interface Chapter {
   id: number;
   title: string;
-  pageCount : number;
+  pageCount: number;
 }
 
 export interface Book {
@@ -9,4 +9,10 @@ export interface Book {
   title :string,
   chapters : Chapter[]
 
+}
+
+export interface Position {
+  book:number,
+  chapter:number,
+  page: number
 }

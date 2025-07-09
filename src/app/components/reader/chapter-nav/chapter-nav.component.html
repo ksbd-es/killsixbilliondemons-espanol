@@ -1,1 +1,24 @@
-<p>chapter-nav works!</p>
+<button>Anterior</button>
+<form action="">
+
+  <select [(ngModel)]="path" (change)="onPathChange($event)" name="pathInput">
+    @for (book of books; track book.id) {
+      <optgroup label="{{book.title}}">
+        @for (chapter of book.chapters ; track chapter.id){
+          <option [value]=`${book.id}-${chapter.id}-${1}`>
+            <div>{{chapter.title}}</div>
+          </option>
+        }
+      </optgroup>
+    }
+  </select>
+  <select (change)="onPathChange($event)" name="pageInput">
+    @for (page of pages ; track $index){
+      <option [value]=`${$index}`>
+        <div>Pagina {{$index}}</div>
+      </option>
+    }
+  </select>
+
+</form>
+<button>Siguiente</button>

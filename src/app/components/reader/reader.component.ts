@@ -2,6 +2,8 @@ import {Component, inject, OnInit} from '@angular/core';
 import {ChapterNavComponent} from './chapter-nav/chapter-nav.component';
 import {PageComponent} from './page/page.component';
 import {ActivatedRoute} from '@angular/router';
+import {BookDataService} from '../../services/book-data.service';
+import {Book, Position} from '../../models/models';
 
 @Component({
   selector: 'app-reader',
@@ -14,10 +16,14 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ReaderComponent implements OnInit {
   route : ActivatedRoute;
+  position : Position;
+  bookService : BookDataService;
   path : string = '1-1-1';
 
   constructor() {
     this.route = inject(ActivatedRoute);
+    this.bookService = inject(BookDataService);
+    this.position = this.bookService.getInitialPosition();
   }
 
   ngOnInit(): void {
@@ -26,4 +32,8 @@ export class ReaderComponent implements OnInit {
     let page = this.route.snapshot.params['page'];
         this.path = `${book}-${chapter}-${page}`;
     }
+  handleChapterSelect($event: string) {
+    console.log($event);
+    this.path = $event;
+  }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../models/models';
+import {Book, Position} from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -78,4 +78,98 @@ export class BookDataService {
 
 
   constructor() { }
+
+  getData() {
+    return this.data;
+  }
+  getPages(position : Position) {
+    return new Array(this.data[position.book-1].chapters[position.chapter-1].pageCount);
+  }
+
+  getInitialPosition() {
+    return {
+      book: 1,
+      chapter: 1,
+      page: 1
+    }
+  }
+  getNextPosition(currentPosition : Position){
+    let book = this.data[currentPosition.book-1];
+    let chapter = book.chapters[currentPosition.chapter-1];
+    let page = currentPosition.page;
+
+    let isLastBook = currentPosition.book === this.data.length;
+    let isLastChapter = chapter.id === book.chapters.length;
+    let isLastPage = chapter.pageCount === page;
+
+    let nextPosition : Position = {
+      book: 0,
+      chapter: 0,
+      page: 0,
+    };
+    if(isLastPage){
+      if(isLastChapter){
+        if(isLastBook){
+          nextPosition.book = currentPosition.book;
+          nextPosition.chapter = currentPosition.chapter;
+          nextPosition.page = currentPosition.page;
+        }
+        else{
+          nextPosition.book = currentPosition.book + 1;
+          nextPosition.chapter = 1;
+          nextPosition.page = 1;
+        }
+      }
+      else{
+        nextPosition.book = currentPosition.book;
+        nextPosition.chapter = currentPosition.chapter + 1;
+        nextPosition.page = 1;
+      }
+    }
+    else {
+      nextPosition.book = currentPosition.book;
+      nextPosition.chapter = currentPosition.chapter;
+      nextPosition.page = page + 1;
+    }
+  }
+  getPreviousPosition(currentPosition : Position){
+    let book = this.data[currentPosition.book-1];
+    let chapter = book.chapters[currentPosition.chapter-1];
+    let page = currentPosition.page;
+
+    let isFirstBook = currentPosition.book === this.data.length;
+    let isFirstChapter = chapter.id === book.chapters.length;
+    let isFirstPage = chapter.pageCount === page;
+
+    let nextPosition : Position = {
+      book: 0,
+      chapter: 0,
+      page: 0,
+    };
+    if(isFirstPage){
+      if(isFirstChapter){
+        if(isFirstBook){
+          nextPosition.book = currentPosition.book;
+          nextPosition.chapter = currentPosition.chapter;
+          nextPosition.page = currentPosition.page;
+        }
+        else{
+          nextPosition.book = currentPosition.book - 1;
+          nextPosition.chapter =  this.data[book.id-2].chapters.length;
+          nextPosition.page =  this.data[nextPosition.book-1].chapters[nextPosition.chapter-1].pageCount;
+        }
+      }
+      else{
+        nextPosition.book = currentPosition.book;
+        nextPosition.chapter = currentPosition.chapter - 1;
+        nextPosition.page = this.data[book.id-1].chapters[chapter.id-2].pageCount;
+      }
+    }
+    else {
+      nextPosition.book = currentPosition.book;
+      nextPosition.chapter = currentPosition.chapter;
+      nextPosition.page = page - 1;
+    }
+  }
+
 }

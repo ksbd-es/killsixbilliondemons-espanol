@@ -32,7 +32,7 @@ export class PageComponent implements OnInit , OnChanges{
   }
   renderPage(): void {
     this.img = this.cld.image(this.route);
-    this.img.resize(fill().width(250));
+    this.img.resize(fill());
   }
 
 }
