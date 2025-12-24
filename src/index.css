@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 @layer base {
-  :root {
+  :root,
+  html,
+  body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.5;
     font-weight: 400;
@@ -9,8 +11,11 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
 
-    /* Theme variables */
+  :root,
+  html:not([class*="theme-"]) {
+    /* Default theme variables (Original) */
     --color-bg: #191315;
     --color-text: #ea2f45;
     --color-text-hover: #ffffff;
